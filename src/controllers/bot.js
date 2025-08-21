@@ -5,7 +5,8 @@ import tmi from "tmi.js";
 
 let client = null;
 let intervalId = null;
-const is_active = client !== null;
+
+const isActive = () => client !== null;
 
 const startBot = ctrlWrapper(async (req, res) => {
   const { name, message, interval, token } = req.body;
@@ -42,7 +43,7 @@ const startBot = ctrlWrapper(async (req, res) => {
 
   res.status(201).json({
     message: "Bot started.",
-    is_active: client !== null,
+    is_active: isActive(),
   });
 });
 
@@ -60,12 +61,12 @@ const stopBot = ctrlWrapper(async (req, res) => {
 
   res.status(200).json({
     message: "Bot stopped.",
-    is_active,
+    is_active: isActive(),
   });
 });
 
 const botStatus = ctrlWrapper(async (req, res) => {
-  res.status(200).json({ is_active });
+  res.status(200).json({ is_active: isActive() });
 });
 
 export default { start: startBot, stop: stopBot, status: botStatus };
