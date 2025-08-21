@@ -42,7 +42,7 @@ const startBot = ctrlWrapper(async (req, res) => {
 
   res.status(201).json({
     message: "Bot started.",
-    is_active,
+    is_active: client !== null,
   });
 });
 
