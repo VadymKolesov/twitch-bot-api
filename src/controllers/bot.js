@@ -31,7 +31,7 @@ const startBot = ctrlWrapper(async (req, res) => {
     sendMessage();
     intervalId = setInterval(sendMessage, interval * 60 * 1000);
 
-    res.status(201).json({ message: "Bot started." });
+    res.status(201).json({ message: "Bot started.", is_active: isActive() });
 
     client.on("disconnected", () => {
       console.log("Bot disconnected.");
