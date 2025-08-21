@@ -8,7 +8,12 @@ import botRouter from "./src/routes/botRouter.js";
 const app = express();
 
 app.use(morgan("tiny"));
-app.use(cors());
+app.use(
+  cors({
+    origin: process.env.ORIGIN,
+    methods: ["GET", "POST"],
+  })
+);
 app.use(express.json());
 
 app.use("/api/bot", botRouter);
